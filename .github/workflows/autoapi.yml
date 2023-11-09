@@ -5,32 +5,28 @@ on:
   release:
     types: [published]
   push:
-    tags:
-    - 'v*'
-  #  branches: 
-  #    - master
-  schedule:
-    - cron: "10 */2 * * *"
-  watch:
-    types: [started]
-   
+    branches: 
+      - main
+#  schedule:
+#    - cron: '0 0/3 * * *'
+  workflow_dispatch:
+  
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: (github.event.repository.owner.id == github.event.sender.id) || ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}  # Self-ordered start
     #if: github.event.repository.owner.id == github.event.sender.id  # Self-ordered start
     name: Build and call API
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@main
       with:
         persist-credentials: true # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
     - name: Set up Python #Install python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.9
-        check-latest: true
+        python-version: 3.8
     - name: Install requests #Installation requests
       run: |
         pip install requests
@@ -65,8 +61,8 @@ jobs:
         git add .
         git commit -m "Update new refresh token with MSO_E5_Dev_AutoRenew" -a
     - name: Push changes
-      uses: ad-m/github-push-action@v0.6.0
+      uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
+        # branch: ${{ github.ref }}
         #force_with_lease: true
