@@ -7,9 +7,10 @@ on:
   push:
     branches: 
       - main
-#  schedule:
-#    - cron: '0 0/3 * * *'
-  workflow_dispatch:
+  schedule:
+    - cron: "10 */2 * * *"
+  watch:
+    types: [started]
   
 jobs:
   build:
@@ -64,5 +65,5 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        # branch: ${{ github.ref }}
+        branch: ${{ github.ref }}
         #force_with_lease: true
