@@ -56,6 +56,7 @@ def get_access_token(refresh_token, client_id, client_secret):
 def main():
     random.shuffle(calls)
     endpoints = calls[random.randint(0,10)::]
+    print(refresh_token)
     access_token = get_access_token(refresh_token, client_id, client_secret)
     session = requests.Session()
     session.headers.update({
