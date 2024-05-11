@@ -8,9 +8,7 @@ on:
     branches: 
       - main
   schedule:
-    # auskommentiert damit es aktuell nicht läuft
-     - cron: "10 */2 * * *"
-    # - cron: "10 */2 * * *"
+    - cron: "10 */2 * * *"
   watch:
     types: [started]
   
