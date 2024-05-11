@@ -8,12 +8,6 @@ import random
 # user: User.Read.All、User.ReadWrite.All、Directory.Read.All、Directory.ReadWrite.All
 # mail: Mail.Read、Mail.ReadWrite、MailboxSettings.Read、MailboxSettings.ReadWrite
 # After registration, you must click on behalf of xxx to grant administrator consent, otherwise outlook api cannot be called
-
-
-
-
-
-
 calls = [
     'https://graph.microsoft.com/v1.0/me/drive/root',
     'https://graph.microsoft.com/v1.0/me/drive',
@@ -34,7 +28,6 @@ calls = [
     'https://graph.microsoft.com/v1.0/sites/root',
     'https://graph.microsoft.com/v1.0/sites/root/drives'
 ]
-
 def get_access_token(refresh_token, client_id, client_secret):
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
